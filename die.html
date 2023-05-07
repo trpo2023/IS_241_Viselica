@@ -101,21 +101,32 @@
         display: none;
       }
       button {
-        display: inline-block;
-        padding: 8px;
-        margin: 4px;
+        padding: 10px;
+        margin: 5px;
         font-size: 20px;
-        border: none;
-        background-color: #eee;
+        border: 1px solid black;
+        background-color: white;
         cursor: pointer;
       }
-            button.active {
-        background-color: #ccc;
+      .used {
+      background-color: gray;
+      cursor: not-allowed;
       }
       input {
         padding: 8px;
         font-size: 15px;
         margin: 50px;
+        text-align: center;
+      }
+      #keyboard {
+        width: 800px;
+        border: 1px solid black;
+        position: absolute;
+        margin-left: 25%;
+        border-collapse: collapse;
+      }
+      #keyboard div {
+        position: absolute;
       }
     </style>
   </head>
@@ -133,53 +144,53 @@
       <div id="left-leg"></div>
       <div id="right-leg"></div>
     </div>
-    <div id="keyboard">
+    <div>
       <p id="secretWord"></p>
       <p id="guesses"></p>
       <p id="result"></p>
       <p id="remainingGuesses"></p>
       <form>
         <label for="guess">Введите букву:</label>
-        <input type="text" id="guess">
-        <input type="button" value="Угадать" onclick="guessLetter()">
+        <input type="text" id="guess" maxlength="1">
+        <input type="button" value="Угадать" onclick="guessLetter() ">
       </form>
-      <!-- Создаем кнопки для букв русского алфавита -->
-      <button>А</button>
-      <button>Б</button>
-      <button>В</button>
-      <button>Г</button>
-      <button>Д</button>
-      <button>Е</button>
-      <button>Ё</button>
-      <button>Ж</button>
-      <button>З</button>
-      <button>И</button>
-      <button>Й</button>
-      <button>К</button>
-      <button>Л</button>
-      <button>М</button>
-      <button>Н</button>
-      <button>О</button>
-      <button>П</button>
-      <button>Р</button>
-      <button>С</button>
-      <button>Т</button>
-      <button>У</button>
-      <button>Ф</button>
-      <button>Х</button>
-      <button>Ц</button>
-      <button>Ч</button>
-      <button>Ш</button>
-      <button>Щ</button>
-      <button>Ъ</button>
-      <button>Ы</button>
-      <button>Ь</button>
-      <button>Э</button>
-      <button>Ю</button>
-      <button>Я</button>
-
-      <!-- Создаем кнопку delete -->
-      <button id="delete-button">delete</button>
+    <div id="keyboard">
+        <!-- Создаем кнопки для букв русского алфавита -->
+        <button class="key">А</button>
+        <button class="key">Б</button>
+        <button class="key">В</button>
+        <button class="key">Г</button>
+        <button class="key">Д</button>
+        <button class="key">Е</button>
+        <button class="key">Ж</button>
+        <button class="key">З</button>
+        <button class="key">И</button>
+        <button class="key">Й</button>
+        <button class="key">К</button>
+        <button class="key">Л</button>
+        <button class="key">М</button>
+        <button class="key">Н</button>
+        <button class="key">О</button>
+        <button class="key">П</button>
+        <button class="key">Р</button>
+        <button class="key">С</button>
+        <button class="key">Т</button>
+        <button class="key">У</button>
+        <button class="key">Ф</button>
+        <button class="key">Х</button>
+        <button class="key">Ц</button>
+        <button class="key">Ч</button>
+        <button class="key">Ш</button>
+        <button class="key">Щ</button>
+        <button class="key">Ъ</button>
+        <button class="key">Ы</button>
+        <button class="key">Ь</button>
+        <button class="key">Э</button>
+        <button class="key">Ю</button>
+        <button class="key">Я</button>
+        <!-- Создаем кнопку Delete -->
+        <button class="key" id="Delete-button">Delete</button>
+      </div>
     </div>
     <script>
       // Получаем ссылки на все кнопки
@@ -187,23 +198,26 @@
       // Добавляем обработчик событий на каждую кнопку
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          // Если нажата кнопка delete, удаляем последний символ из поля ввода
-          if (button.id === 'delete-button') {
+          // Если нажата кнопка Delete, удаляем последний символ из поля ввода
+          if (button.id === 'Delete-button') {
             guess.value = guess.textContent.slice(0, -1);
           } else {
             // Иначе добавляем текст кнопки в поле ввода
             guess.value += button.textContent;
           }
-          // Делаем кнопку активной
-          button.classList.add('active');
         });
       });
       // список слов для угадывания
-      const words = ['яблоко', 'апельсин', 'ананас', 'манго', 'банан'];
+      const words = ['БАНАН'];
       // выбираем случайное слово из списка
       let secretWord = words[Math.floor(Math.random() * words.length)];
       // массив для отслеживания угаданных букв
-      let guessedLetters = []; 
+      var guessedLetters = []; 
+      // функция для блокировки кнопки
+      function blockButton(button) {
+      button.classList.add("used");
+      button.disabled = true;
+      }
       // количество попыток, оставшихся у игрока 
       let remainingGuesses = 10; 
       // элементы страницы, с которыми будем работать 
@@ -224,14 +238,14 @@
       
       // функция, которая будет вызываться при каждой попытке угадать букву
     function guessLetter() {
-      const guess = document.getElementById('guess').value.toLowerCase();
+      const guess = document.getElementById('guess').value;
       // проверяем, что введена только одна буква
       if (guess.length !== 1) {
         alert('Пожалуйста, введите только одну букву.');
         return;
       }
       // проверяем, что введенный символ является буквой
-      if (!guess.match(/[a-zа-я]/)) {
+      if (!guess.match(/[A-ZА-Я]/)) {
         alert('Пожалуйста, введите букву.');
         return;
       }
@@ -240,8 +254,14 @@
         alert('Вы уже угадывали эту букву.');
         return;
       }
-      // добавляем букву в список угаданных
+      // добавляем букву в список угаданных и блокируем кнопку
       guessedLetters.push(guess);
+      // блокируем использованные кнопки
+      document.querySelectorAll(".key").forEach(function(button) {
+        if (guessedLetters.includes(button.innerHTML)) {
+          blockButton(button);
+        }
+      });
       // проверяем, есть ли угаданная буква в загаданном слове
       if (secretWord.includes(guess)) {
       // обновляем отображение угаданных букв
