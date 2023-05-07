@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Игра "Виселица"</title>
+    <style>
+      /* стили для отображения виселицы и клавиатуры */
+      #hangman {
+        width: 300px;
+        height: 300px;
+        margin: 50px;
+        border: 1px solid black;
+        position: relative;
+      }
+      #hangman div {
+        position: absolute;
+      }
+      #base1 {
+        top: 4%;
+        left: 47%;
+        width: 0%;
+        height: 4%;
+        border: 4px solid black;
+        display: none;
+      }
+      #base2 {
+        top: 2%;
+        left: 47%;
+        width: 32%;
+        height: 0%;
+        border: 6px solid black;
+        display: none;
+      }
+      #base3 {
+        top: 2%;
+        left: 80%;
+        width: 0%;
+        height: 79%;
+        border: 9px solid black;
+        display: none;
+      }
+      #base4 {
+        top: 86%;
+        left: 20%;
+        width: 68%;
+        height: 0%;
+        border:12px solid black;
+        display: none;
+      }
+      #head {
+        top: 10%;
+        left: 35%;
+        width: 25%;
+        height: 25%;
+        border-radius: 50%;
+        border: 3px solid black;
+        display: none;
+      }
+      #body {
+        top: 36%;
+        left: 48%;
+        width: 0%;
+        height: 30%;
+        border: 2px solid black;
+        display: none;
+      }
+      #left-arm {
+        top: 48%;
+        left: 27%;
+        width: 20%;
+        transform-origin: right top;
+        transform: rotate(25deg);
+        border: 2px solid black;
+        display: none;
+      }
+      #right-arm {
+        top: 48%;
+        left: 49%;
+        width: 20%;
+        transform-origin: left top;
+        transform: rotate(-25deg);
+        border: 2px solid black;
+        display: none;
+      }
+      #left-leg {
+        top: 66%;
+        left: 27%;
+        width: 20%;
+        transform-origin: right top;
+        transform: rotate(-55deg);
+        border: 2px solid black;
+        display: none;
+      }
+      #right-leg {
+        top: 66%;
+        left: 49%;
+        width: 20%;
+        transform-origin: left top;
+        transform: rotate(55deg);
+        border: 2px solid black;
+        display: none;
+      }
+      button {
+        display: inline-block;
+        padding: 8px;
+        margin: 4px;
+        font-size: 20px;
+        border: none;
+        background-color: #eee;
+        cursor: pointer;
+      }
+            button.active {
+        background-color: #ccc;
+      }
+      input {
+        padding: 8px;
+        font-size: 15px;
+        margin: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Игра "Виселица"</h1>
+    <div id="hangman">
+      <div id="base1"></div> 
+      <div id="base2"></div> 
+      <div id="base3"></div>
+      <div id="base4"></div>         
+      <div id="head"></div>
+      <div id="body"></div>
+      <div id="left-arm"></div>
+      <div id="right-arm"></div>
+      <div id="left-leg"></div>
+      <div id="right-leg"></div>
+    </div>
+    <div id="keyboard">
+      <p id="secretWord"></p>
+      <p id="guesses"></p>
+      <p id="result"></p>
+      <p id="remainingGuesses"></p>
+      <form>
+        <label for="guess">Введите букву:</label>
+        <input type="text" id="guess">
+        <input type="button" value="Угадать" onclick="guessLetter()">
+      </form>
+      <!-- Создаем кнопки для букв русского алфавита -->
+      <button>А</button>
+      <button>Б</button>
+      <button>В</button>
+      <button>Г</button>
+      <button>Д</button>
+      <button>Е</button>
+      <button>Ё</button>
+      <button>Ж</button>
+      <button>З</button>
+      <button>И</button>
+      <button>Й</button>
+      <button>К</button>
+      <button>Л</button>
+      <button>М</button>
+      <button>Н</button>
+      <button>О</button>
+      <button>П</button>
+      <button>Р</button>
+      <button>С</button>
+      <button>Т</button>
+      <button>У</button>
+      <button>Ф</button>
+      <button>Х</button>
+      <button>Ц</button>
+      <button>Ч</button>
+      <button>Ш</button>
+      <button>Щ</button>
+      <button>Ъ</button>
+      <button>Ы</button>
+      <button>Ь</button>
+      <button>Э</button>
+      <button>Ю</button>
+      <button>Я</button>
+
+      <!-- Создаем кнопку delete -->
+      <button id="delete-button">delete</button>
+    </div>
+    <script>
+      // Получаем ссылки на все кнопки
+      const buttons = document.querySelectorAll('button');
+      // Добавляем обработчик событий на каждую кнопку
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          // Если нажата кнопка delete, удаляем последний символ из поля ввода
+          if (button.id === 'delete-button') {
+            guess.value = guess.textContent.slice(0, -1);
+          } else {
+            // Иначе добавляем текст кнопки в поле ввода
+            guess.value += button.textContent;
+          }
+          // Делаем кнопку активной
+          button.classList.add('active');
+        });
+      });
+      // список слов для угадывания
+      const words = ['яблоко', 'апельсин', 'ананас', 'манго', 'банан'];
+      // выбираем случайное слово из списка
+      let secretWord = words[Math.floor(Math.random() * words.length)];
+      // массив для отслеживания угаданных букв
+      let guessedLetters = []; 
+      // количество попыток, оставшихся у игрока 
+      let remainingGuesses = 10; 
+      // элементы страницы, с которыми будем работать 
+      const secretWordElement = document.getElementById('secretWord');
+      const guessesElement = document.getElementById('guesses');
+      const resultElement = document.getElementById('result');
+      const remainingGuessesElement = document.getElementById('remainingGuesses');
+      const base1Element = document.getElementById('base1');   
+      const base2Element = document.getElementById('base2');
+      const base3Element = document.getElementById('base3');
+      const base4Element = document.getElementById('base4');   
+      const headElement = document.getElementById('head');
+      const bodyElement = document.getElementById('body');
+      const leftArmElement = document.getElementById('left-arm');
+      const rightArmElement = document.getElementById('right-arm');
+      const leftLegElement = document.getElementById('left-leg');
+      const rightLegElement = document.getElementById('right-leg');
+      
+      // функция, которая будет вызываться при каждой попытке угадать букву
+    function guessLetter() {
+      const guess = document.getElementById('guess').value.toLowerCase();
+      // проверяем, что введена только одна буква
+      if (guess.length !== 1) {
+        alert('Пожалуйста, введите только одну букву.');
+        return;
+      }
+      // проверяем, что введенный символ является буквой
+      if (!guess.match(/[a-zа-я]/)) {
+        alert('Пожалуйста, введите букву.');
+        return;
+      }
+      // проверяем, что буква не была угадана ранее
+      if (guessedLetters.includes(guess)) {
+        alert('Вы уже угадывали эту букву.');
+        return;
+      }
+      // добавляем букву в список угаданных
+      guessedLetters.push(guess);
+      // проверяем, есть ли угаданная буква в загаданном слове
+      if (secretWord.includes(guess)) {
+      // обновляем отображение угаданных букв
+      updateGuessedLetters();
+      // проверяем, угадано ли все слово
+      if (checkWin()) {
+        resultElement.innerHTML = 'Поздравляем, вы выиграли!';
+        disableInput();
+      }
+    } else {
+      // уменьшаем количество попыток
+      remainingGuesses--;
+      // обновляем отображение оставшихся попыток
+      updateRemainingGuesses();
+      // обновляем отображение виселицы
+      updateHangman();
+      // проверяем, закончились ли попытки
+      if (remainingGuesses === 0) {
+        resultElement.innerHTML = 'Вы проиграли. Загаданное слово было: ' + secretWord;
+        disableInput();
+      }
+    }
+    // очищаем поле ввода
+    document.getElementById('guess').value = '';
+  }
+
+  // функция для обновления отображения угаданных букв
+  function updateGuessedLetters() {
+    let displayString = '';
+    for (let i = 0; i < secretWord.length; i++) {
+      if (guessedLetters.includes(secretWord[i])) {
+        displayString += secretWord[i] + ' ';
+      } else {
+        displayString += '_ ';
+      }
+    }
+    secretWordElement.innerHTML = displayString;
+  }
+
+  // функция для проверки, угадано ли все слово
+  function checkWin() {
+     for (let i = 0; i < secretWord.length; i++)
+      { if (!guessedLetters.includes(secretWord[i]))
+        { 
+          return false;
+        }
+      } return true; 
+  }
+  
+  // функция для обновления отображения оставшихся попыток
+  function updateRemainingGuesses() {
+    remainingGuessesElement.innerHTML = 'Попытки: ' + remainingGuesses;
+  }
+
+  // функция для обновления отображения виселицы
+  function updateHangman() {
+    switch (remainingGuesses) {
+      case 9:
+        base4Element.style.display = 'block';
+        break;
+      case 8:
+        base3Element.style.display = 'block';
+        break;
+      case 7:
+        base2Element.style.display = 'block';
+        break;
+      case 6:
+        base1Element.style.display = 'block';
+        break;
+      case 5:
+        headElement.style.display = 'block';
+        break;
+      case 4:
+        bodyElement.style.display = 'block';
+        break;
+      case 3:
+        leftArmElement.style.display = 'block';
+        break;
+      case 2:
+        rightArmElement.style.display = 'block';
+        break;
+      case 1:
+        leftLegElement.style.display = 'block';
+        break;
+      case 0:
+        rightLegElement.style.display = 'block';
+        break;
+    }
+  }
+
+  // функция для запрета ввода после окончания игры
+  function disableInput() {
+    document.getElementById('guess').disabled = true;
+    document.getElementById('guessButton').disabled = true;
+  }
+
+  // обработчик события для кнопки "Угадать"
+  document.getElementById('guessButton').addEventListener('click', guessLetter);
+
+  // инициализация отображения
+  updateGuessedLetters();
+  updateRemainingGuesses();
+  updateHangman();
+</script>
+</body>
+</html>
