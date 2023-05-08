@@ -1,0 +1,15 @@
+{
+  "name": "viselica",
+  "version": "1.0.0",
+  "description": "Игра виселица",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maximus",
+  "license": "MIT",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
