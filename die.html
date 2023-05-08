@@ -2,15 +2,23 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Игра "Виселица"</title>
+    <title id="Title">Игра "Виселица"</title>
     <style>
+      body {
+        background-color: #e9f0c5;
+      }
+      h1 {
+        text-align: center;
+      }
       /* стили для отображения виселицы и клавиатуры */
       #hangman {
         width: 300px;
         height: 300px;
         margin: 50px;
+        margin-left: 25%;
         border: 1px solid black;
         position: relative;
+        background-color: white;
       }
       #hangman div {
         position: absolute;
@@ -110,20 +118,22 @@
       }
       .usedTrue {
       background-color: green;
+      color: black;
       cursor: not-allowed;
       }
       .usedFalse {
       background-color: rgb(170, 3, 3);
+      color: black;
       cursor: not-allowed;
       }
       input {
         padding: 8px;
         font-size: 15px;
-        margin: 50px;
         text-align: center;
+        margin: 50px;
       }
       #keyboard {
-        width: 800px;
+        width: 815px;
         border: 1px solid black;
         position: absolute;
         margin-left: 25%;
@@ -131,6 +141,70 @@
       }
       #keyboard div {
         position: absolute;
+      }
+      /* Скрываем модальное окно по умолчанию */
+      .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      }
+
+      /* Стили для контента модального окна */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        text-align: center;
+      }
+
+      /* Стили для кнопки закрытия модального окна */
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      /* Стили для кнопки закрытия модального окна при наведении на нее курсора мыши */
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      #StartWindow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: 999;
+        -webkit-animation: fade .6s;
+        -moz-animation: fade .6s;
+        animation: fade .6s;
+        overflow: auto;
+      }
+      #secretWord {
+        font-size: 3em;
+        text-align: center;
+        font-family: Arial;
+      }
+      #inputText {
+        font-size: 1.2em;
+      }
+      #inputButtonText {
+        font-size: 1.2em;
+        background-color: #adeede;
       }
     </style>
   </head>
@@ -153,12 +227,40 @@
       <p id="guesses"></p>
       <p id="result"></p>
       <p id="remainingGuesses"></p>
-      <form>
-        <label for="guess">Введите букву:</label>
-        <input type="text" id="guess" maxlength="1">
-        <input type="button" value="Угадать" onclick="guessLetter() ">
-      </form>
-    <div id="keyboard">
+      <div style="display:flex; justify-content: center;">
+        <form>
+          <label for="guess" id="inputText">Введите букву:</label>
+          <input type="text" id="guess" maxlength="1">
+          <input type="button" value="Угадать" id="inputButtonText" onclick="guessLetter() ">
+        </form>
+      </div>
+      <!--код для модального проигрыша окна-->
+      <div id="myModalLost" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2>Вы проиграли!</h2>
+          <button onclick="startNewGame()">Начать заново</button>
+         </div>
+      </div>
+      <!--код для модального выигрыша окна-->
+      <div id="myModalWin" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2>Вы выиграли!</h2>
+          <button onclick="startNewGame()">Начать заново</button>
+          </div>
+      </div>
+      <div id="StartWindow" class="modal">
+        <div class="modal-content">
+          <h2>Выберите тему:</h2>
+          <button onclick="startGame('Фрукты')">Фрукты</button>
+          <button onclick="startGame('Насекомые')">Насекомые</button>
+          <button onclick="startGame('Животные')">Животные</button>
+          <button onclick="startGame('Цвета')">Цвета</button>
+          <button onclick="startGame('Страны')">Страны</button>
+          </div>
+      </div>
+      <div id="keyboard">
         <!-- Создаем кнопки для букв русского алфавита -->
         <button class="key" onclick="addLetter('А')">А</button>
         <button class="key" onclick="addLetter('Б')">Б</button>
@@ -181,7 +283,7 @@
         <button class="key" onclick="addLetter('Т')">Т</button>
         <button class="key" onclick="addLetter('У')">У</button>
         <button class="key" onclick="addLetter('Ф')">Ф</button>
-        <button class="key" onclick="addLetter('Ч')">Х</button>
+        <button class="key" onclick="addLetter('Х')">Х</button>
         <button class="key" onclick="addLetter('Ц')">Ц</button>
         <button class="key" onclick="addLetter('Ч')">Ч</button>
         <button class="key" onclick="addLetter('Ш')">Ш</button>
@@ -192,20 +294,15 @@
         <button class="key" onclick="addLetter('Э')">Э</button>
         <button class="key" onclick="addLetter('Ю')">Ю</button>
         <button class="key" onclick="addLetter('Я')">Я</button>
-        <!-- Создаем кнопку Delete -->
-        <button class="key" id="Delete-button">Delete</button>
       </div>
     </div>
     <script>
+      setTimeout("document.getElementById('StartWindow').style.display='block'");
       // Получаем ссылки на все кнопки
       const buttons = document.querySelectorAll('button');
       // Добавляем обработчик событий на каждую кнопку
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          // Если нажата кнопка Delete, удаляем последний символ из поля ввода
-          if (button.id === 'Delete-button') {
-            guess.value = guess.textContent.slice(0, -1);
-          }
         });
       });
       function addLetter(letter) {
@@ -213,10 +310,26 @@
       var inputField = document.getElementById("guess");
       inputField.value = letter;
       }
-      // список слов для угадывания
-      const words = ['БАНАН'];
-      // выбираем случайное слово из списка
-      let secretWord = words[Math.floor(Math.random() * words.length)];
+      // списки слов для каждой темы
+      var chooseWord = "";
+      var secretWord = [];
+
+      var themes = {
+      'Фрукты' : ['БАНАН', 'АПЕЛЬСИН', 'АНАНАС', 'АРБУЗ', 'ВИНОГРАД', 'ГРАНАТ', 'ЛИМОН', 'МАНГО', 'ПЕРСИК'],
+      'Насекомые' : ['ПАУК', 'МУХА', 'КОМАР', 'СТРЕКОЗА', 'КУЗНЕЧИК', 'КЛОП', 'КОРОЕД'],
+      'Животные' : ['КОШКА', 'СОБАКА', 'ЛЕВ', 'ТИГР', 'ЖИРАФ', 'ОБЕЗЬЯНА', 'ПОПУГАЙ'],
+      'Цвета' : ['ЗЕЛЕНЫЙ', 'КРАСНЫЙ', 'ЧЕРНЫЙ', 'КОРИЧНЕВЫЙ', 'ЖЕЛТЫЙ', 'ОРАНЖЕВЫЙ', 'СИНИЙ', 'ГОЛУБОЙ', 'ФИОЛЕТОВЫЙ', 'СЕРЫЙ'],
+      'Страны' : ['АВСТРАЛИЯ', 'АРМЕНИЯ', 'БЕЛОРУССИЯ', 'БРАЗИЛИЯ', 'ВЕНГРИЯ', 'ГВИНЕЯ', 'ГРЕЦИЯ', 'ДАНИЯ', 'ИРАН', 'КАНАДА', 'КОЛУМБИЯ', 'КОРЕЯ', 'ЯПОНИЯ', 'ВЕЛИКОБРИТАНИЯ']
+      }
+      // выбор случайного слова из списка
+      function startGame(theme) {
+        var words = themes[theme];
+        secretWord = words[Math.floor(Math.random() * words.length)];
+        closeStartWindow();
+      }
+      function closeStartWindow(){
+        StartWindow.style.display='none';
+      }
       // массив для всех отслеживания угаданных букв
       var guessedLetters = [];
       // массив для отслеживвания не верно угаданных букв
@@ -230,6 +343,30 @@
       function blockButtonFalse(button) {
       button.classList.add("usedFalse");
       button.disabled = true;
+      }
+      // Получаем ссылку на модальное проигрыша окно и кнопку закрытия
+      var modal = document.getElementById("myModalLost");
+      var span = document.getElementsByClassName("close")[0];
+      // Получаем ссылку на модальное выигрыша окно и кнопку закрытия
+      var modal = document.getElementById("myModalWin");
+      var span = document.getElementsByClassName("close")[0];
+
+      // Функция для открытия модального окна
+      function openModalLost() {
+        modal.style.display = "block";
+      }
+      // Функция для открытия модального окна
+      function openModalWin() {
+        modal.style.display = "block";
+      }
+      // Функция для закрытия модального окна
+      function closeModal() {
+      modal.style.display = "none";
+      }
+      // Функция для запуска новой игры
+      function startNewGame() {
+        location.reload();
+        closeModal();
       }
       // количество попыток, оставшихся у игрока 
       let remainingGuesses = 10; 
@@ -254,7 +391,7 @@
       const guess = document.getElementById('guess').value;
       // проверяем, что введена только одна буква
       if (guess.length !== 1) {
-        alert('Пожалуйста, введите только одну букву.');
+        alert('Пожалуйста, введите букву.');
         return;
       }
       // проверяем, что введенный символ является буквой
@@ -282,7 +419,7 @@
       // проверяем, угадано ли все слово
       if (checkWin()) {
         resultElement.innerHTML = 'Поздравляем, вы выиграли!';
-        disableInput();
+        openModalWin();
       }
     } else {
       guessedLettersFalse.push(guess);
@@ -301,7 +438,7 @@
       // проверяем, закончились ли попытки
       if (remainingGuesses === 0) {
         resultElement.innerHTML = 'Вы проиграли. Загаданное слово было: ' + secretWord;
-        disableInput(button);
+        openModalLost();
       }
     }
     // очищаем поле ввода
@@ -371,13 +508,6 @@
         break;
     }
   }
-
-  // функция для запрета ввода после окончания игры
-  function disableInput(button) {
-    document.getElementById('guess').disabled = true;
-    document.getElementById('guessButton').disabled = true;
-  }
-
   // обработчик события для кнопки "Угадать"
   document.getElementById('guessButton').addEventListener('click', guessLetter);
 
