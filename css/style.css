@@ -1,0 +1,268 @@
+/* Стили отображения фона страницы */
+body {
+  background-color: #e9f0c5;
+}
+/* Стили отображения заголовочных блоков */
+h1 {
+  text-align: center;
+}
+h2 {
+  font-size: 2em;
+}
+h3 {
+  font-size: 2em;
+}
+/* Стили для модального окна проигрыша */
+#modalText {
+  font-size: 1.3em;
+}
+#modalText2 {
+  font-size: 1.3em;
+}
+/* Стили для отображения поле ввода на странице */
+#guess {
+  font-size: 1.5em;
+  border: 2px solid black;
+}
+/* Стили для отображения виселицы */
+#hangman {
+  width: 300px;
+  height: 300px;
+  margin: 50px;
+  margin-left: 39%;
+  border: 1px solid black;
+  position: sticky;
+  background-color: white;
+}
+#hangman div {
+  position: absolute;
+}
+#base1 {
+  top: 4%;
+  left: 47%;
+  width: 0%;
+  height: 4%;
+  border: 4px solid black;
+  display: none;
+}
+#base2 {
+  top: 2%;
+  left: 47%;
+  width: 32%;
+  height: 0%;
+  border: 6px solid black;
+  display: none;
+}
+#base3 {
+  top: 2%;
+  left: 80%;
+  width: 0%;
+  height: 79%;
+  border: 9px solid black;
+  display: none;
+}
+#base4 {
+  top: 86%;
+  left: 20%;
+  width: 68%;
+  height: 0%;
+  border:12px solid black;
+  display: none;
+}
+#head {
+  top: 10%;
+  left: 35%;
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  border: 3px solid black;
+  display: none;
+}
+#body {
+  top: 36%;
+  left: 48%;
+  width: 0%;
+  height: 30%;
+  border: 2px solid black;
+  display: none;
+}
+#left-arm {
+  top: 48%;
+  left: 27%;
+  width: 20%;
+  transform-origin: right top;
+  transform: rotate(25deg);
+  border: 2px solid black;
+  display: none;
+}
+#right-arm {
+  top: 48%;
+  left: 49%;
+  width: 20%;
+  transform-origin: left top;
+  transform: rotate(-25deg);
+  border: 2px solid black;
+  display: none;
+}
+#left-leg {
+  top: 66%;
+  left: 27%;
+  width: 20%;
+  transform-origin: right top;
+  transform: rotate(-55deg);
+  border: 2px solid black;
+  display: none;
+}
+#right-leg {
+  top: 66%;
+  left: 49%;
+  width: 20%;
+  transform-origin: left top;
+  transform: rotate(55deg);
+  border: 2px solid black;
+  display: none;
+}
+/* Стили отображения клавиатуры и кнопок клавиатуры */
+button {
+  padding: 10px;
+  margin: 5px;
+  font-size: 20px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+}
+.usedTrue {
+background-color: green;
+color: black;
+cursor: not-allowed;
+}
+.usedFalse {
+background-color: rgb(170, 3, 3);
+color: black;
+cursor: not-allowed;
+}
+input {
+  padding: 8px;
+  font-size: 15px;
+  text-align: center;
+  margin: 50px;
+}
+#keyboard {
+  width: 815px;
+  border: 1px solid black;
+  position: absolute;
+  margin-left: 25%;
+  border-collapse: collapse;
+}
+#keyboard div {
+  position: absolute;
+}
+/* Стили для скрытия модаьного окна проигрыша */
+.modalWiner {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+/* Стили для скрытия модаьного окна выигрыша*/
+.modalLoser {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+/* Стили для контента модального окна */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+
+/* Стили отбражения модального окна выбора тем */
+#StartWindow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 999;
+  -webkit-animation: fade .6s;
+  -moz-animation: fade .6s;
+  animation: fade .6s;
+  overflow: auto;
+}
+
+/* Стили для отображения загаданного слова в виде _ */
+#secretWord {
+  font-size: 3em;
+  text-align: center;
+  font-family: Arial;
+}
+
+/* Стили для отображения поле ввода*/
+#inputText {
+  font-size: 1.2em;
+}
+
+/* Стили для отображения кнопки Угадать*/
+#inputButtonText {
+  font-size: 1.2em;
+  background-color: #adeede;
+}
+
+/* Стили для отображения количества попыток*/
+#remainingGuesses {
+  font-size: 1.5em;
+  font-family: Arial;
+  text-align: right;
+  left: 50%;
+  margin-right: 25%;
+}
+
+/* Стили для вывода наименования выбренной темы*/
+#themeContainer {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: rgb(137, 124, 197);
+}
+
+/* Стили для отображения попытки и темы в одном блоке */
+#attemptsAndTheme {
+  width: 700px;
+  height: 35px;
+  margin: 50px;
+  margin-left: 45%;
+  position: sticky;
+}
+
+#attemptsAndTheme div {
+  position: absolute;
+}
+
+/* Стили для анимации мигания количества попыток*/
+@keyframes blink {
+  0%{ color: red; }
+  50%{ color: transparent; }
+  100%{ color: red; }
+}
+
+.blink {
+  animation: blink 1s;
+}

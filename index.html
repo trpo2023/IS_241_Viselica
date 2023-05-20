@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/style.css" type="text/css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Игра "Виселица"</title>
+    </head>
+    <body>
+        <h1>Игра "Виселица"</h1>
+        <div id="attemptsAndTheme">
+            <div id="remainingGuesses"></div>
+            <div id="themeContainer"></div>
+        </div>
+        <div id="hangman">
+            <div id="base1"></div> 
+            <div id="base2"></div> 
+            <div id="base3"></div>
+            <div id="base4"></div>         
+            <div id="head"></div>
+            <div id="body"></div>
+            <div id="left-arm"></div>
+            <div id="right-arm"></div>
+            <div id="left-leg"></div>
+            <div id="right-leg"></div>
+        </div>
+        <div>
+            <p id="secretWord"></p>
+            <p id="guesses"></p>
+            <p id="result"></p>
+            <div style="display:flex; justify-content: center;">
+            <form>
+                <label for="guess" id="inputText">Введите букву:</label>
+                <input type="text" id="guess" maxlength="1">
+                <input type="button" value="Угадать" id="inputButtonText" onclick="guessLetter() ">
+            </form>
+            </div>
+            <!--Код для модального проигрыша окна-->
+            <div id="myModalLost" class="modalLoser">
+            <div class="modal-content">
+                <h2>Вы проиграли!</h2>
+                <p id="modalText2">Загаданное слово было: <span id="modalText"></span></p>
+                <button onclick="startNewGameLoser()">Начать заново</button>
+            </div>
+            </div>
+            <!--Код для модального выигрыша окна-->
+            <div id="myModalWin" class="modalWiner">
+            <div class="modal-content">
+                <h2>Вы выиграли!</h2>
+                <button onclick="startNewGameWiner()">Начать заново</button>
+                </div>
+            </div>
+            <!-- Код для модального окна выбора тем-->
+            <div id="StartWindow" class="modal">
+            <div class="modal-content">
+                <h3>Выберите тему:</h3>
+                <button onclick="startGame('Фрукты')">Фрукты</button>
+                <button onclick="startGame('Насекомые')">Насекомые</button>
+                <button onclick="startGame('Животные')">Животные</button>
+                <button onclick="startGame('Цвета')">Цвета</button>
+                <button onclick="startGame('Страны')">Страны</button>
+                </div>
+            </div>
+            <div id="keyboard">
+            <!-- Создаем кнопки для букв русского алфавита -->
+            <button class="key" onclick="addLetter('А')">А</button>
+            <button class="key" onclick="addLetter('Б')">Б</button>
+            <button class="key" onclick="addLetter('В')">В</button>
+            <button class="key" onclick="addLetter('Г')">Г</button>
+            <button class="key" onclick="addLetter('Д')">Д</button>
+            <button class="key" onclick="addLetter('Е')">Е</button>
+            <button class="key" onclick="addLetter('Ж')">Ж</button>
+            <button class="key" onclick="addLetter('З')">З</button>
+            <button class="key" onclick="addLetter('И')">И</button>
+            <button class="key" onclick="addLetter('Й')">Й</button>
+            <button class="key" onclick="addLetter('К')">К</button>
+            <button class="key" onclick="addLetter('Л')">Л</button>
+            <button class="key" onclick="addLetter('М')">М</button>
+            <button class="key" onclick="addLetter('Н')">Н</button>
+            <button class="key" onclick="addLetter('О')">О</button>
+            <button class="key" onclick="addLetter('П')">П</button>
+            <button class="key" onclick="addLetter('Р')">Р</button>
+            <button class="key" onclick="addLetter('С')">С</button>
+            <button class="key" onclick="addLetter('Т')">Т</button>
+            <button class="key" onclick="addLetter('У')">У</button>
+            <button class="key" onclick="addLetter('Ф')">Ф</button>
+            <button class="key" onclick="addLetter('Х')">Х</button>
+            <button class="key" onclick="addLetter('Ц')">Ц</button>
+            <button class="key" onclick="addLetter('Ч')">Ч</button>
+            <button class="key" onclick="addLetter('Ш')">Ш</button>
+            <button class="key" onclick="addLetter('Щ')">Щ</button>
+            <button class="key" onclick="addLetter('Ъ')">Ъ</button>
+            <button class="key" onclick="addLetter('Ы')">Ы</button>
+            <button class="key" onclick="addLetter('Ь')">Ь</button>
+            <button class="key" onclick="addLetter('Э')">Э</button>
+            <button class="key" onclick="addLetter('Ю')">Ю</button>
+            <button class="key" onclick="addLetter('Я')">Я</button>
+            </div>
+        </div>
+        <script src="/JS/app.js"></script>
+        <script src="/JS/game.js"></script>
+    </body>
+</html>
