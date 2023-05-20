@@ -1,18 +1,75 @@
 name: Build
+
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  html-lint:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Setup Node.js
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
+          node-version: 14
+
       - name: Install dependencies
-        run: npm ci
-      - name: Lint HTML files
-        run: npx htmlhint **/*.html
+        run: npm install
+
+      - name: Install ESLint
+        run: npm install eslint --save-dev
+        
+      - name: Install eslint-config-standard-with-typescrip
+        run: npm install eslint-config-standard-with-typescript --save-dev
+        
+      - name: Install eslint-config-standard-with-typescrip 2
+        run: npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+
+      - name: Install eslint-plugin-import
+        run: npm install eslint-plugin-import --save-dev
+        
+      - name: Install typescript
+        run: npm install --save-dev typescript
+        
+      - name: Install eslint-plugin-n
+        run: npm install --save-dev eslint-plugin-n
+        
+      - name: Install eslint-plugin-promise
+        run: npm install eslint-plugin-promise --save-dev
+        
+      - name: Install ESLint in JS
+        run: npx eslint JS/app.js
+        
+      - name: Fix app.js
+        run: npx eslint --fix [JS/app.js]
+        
+      - name: Fix game.js
+        run: npx eslint --fix [JS/game.js]
+        
+      - name: Build assets
+        run: |
+          mkdir -p build
+          cp index.html build/
+          cp css/style.css build/
+          cp JS/game.js build/
+          cp JS/app.js build/
+
+      - name: Run HTML linter
+        run: npx htmlhint build/index.html
+
+      - name: Run CSS linter
+        run: npx stylelint build/style.css
+
+      - name: Run JavaScript linter
+        run: npx eslint build/game.js build/app.js
+
+      - name: Deploy
+        run: make
