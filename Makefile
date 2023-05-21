@@ -1,5 +1,5 @@
 run:
-	python3 -m http.server 8002
+	python3 -m http.server
 
 lint:
 	htmlhint index.html
