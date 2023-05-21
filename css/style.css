@@ -231,7 +231,7 @@ background-color: rgba(0,0,0,0.4);
 #remainingGuesses {
   font-size: 1.5em;
   font-family: Arial;
-  text-align: right;
+  left: 50%;
   margin-right: 25%;
 }
 
