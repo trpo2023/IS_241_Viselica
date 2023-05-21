@@ -46,13 +46,7 @@ jobs:
         run: npm install eslint-plugin-promise --save-dev
         
       - name: Install ESLint in JS
-        run: npx eslint JS/app.js
-        
-      - name: Fix app.js
-        run: npx eslint --fix [JS/app.js]
-        
-      - name: Fix game.js
-        run: npx eslint --fix [JS/game.js]
+        run: npx eslint .
         
       - name: Build assets
         run: |
@@ -70,6 +64,3 @@ jobs:
 
       - name: Run JavaScript linter
         run: npx eslint build/game.js build/app.js
-
-      - name: Deploy
-        run: make
