@@ -5,12 +5,39 @@ body {
 /* Стили отображения заголовочных блоков */
 h1 {
   text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 h2 {
   font-size: 2em;
+  font-family: sans-serif;
 }
 h3 {
   font-size: 2em;
+  font-family: sans-serif;
+}
+#buttonItemFruits {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(247, 199, 79);
+}
+#buttonItemInsects {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: aquamarine;
+}
+#buttonItemAnimals {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(243, 53, 91);
+}
+#buttonItemColors {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(95, 95, 231);
+}
+#buttonItemCountries {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(191, 80, 247);
+}
+#buttonEndOfGame {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: gold;
 }
 /* Стили для модального окна проигрыша */
 #modalText {
@@ -133,6 +160,7 @@ button {
   border: 1px solid black;
   background-color: white;
   cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .usedTrue {
 background-color: green;
@@ -227,6 +255,7 @@ background-color: rgba(0,0,0,0.4);
 /* Стили для отображения поле ввода*/
 #inputText {
   font-size: 1.2em;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Стили для отображения кнопки Угадать*/
@@ -234,6 +263,7 @@ background-color: rgba(0,0,0,0.4);
   font-size: 1.2em;
   background-color: #adeede;
   margin: 18px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Стили для отображения количества попыток*/
@@ -262,6 +292,7 @@ background-color: rgba(0,0,0,0.4);
 
 #attemptsAndTheme div {
   position: absolute;
+  font-family: sans-serif;
 }
 
 /* Стили для анимации мигания количества попыток*/

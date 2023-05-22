@@ -39,27 +39,27 @@
             <!--Код для модального проигрыша окна-->
             <div id="myModalLost" class="modalLoser">
             <div class="modal-content">
-                <h2>Вы проиграли!</h2>
+                <h2>❌Вы проиграли!❌</h2>
                 <p id="modalText2">Загаданное слово было: <span id="modalText"></span></p>
-                <button onclick="startNewGameLoser()">Начать заново</button>
+                <button id="buttonEndOfGame" onclick="startNewGameLoser()">Начать заново</button>
             </div>
             </div>
             <!--Код для модального выигрыша окна-->
             <div id="myModalWin" class="modalWiner">
             <div class="modal-content">
-                <h2>Вы выиграли!</h2>
-                <button onclick="startNewGameWiner()">Начать заново</button>
+                <h2>🌟Вы выиграли!🌟</h2>
+                <button id="buttonEndOfGame" onclick="startNewGameWiner()">Начать заново</button>
                 </div>
             </div>
             <!-- Код для модального окна выбора тем-->
             <div id="StartWindow" class="modal">
             <div class="modal-content">
                 <h3>Выберите тему:</h3>
-                <button onclick="startGame('Фрукты')">Фрукты</button>
-                <button onclick="startGame('Насекомые')">Насекомые</button>
-                <button onclick="startGame('Животные')">Животные</button>
-                <button onclick="startGame('Цвета')">Цвета</button>
-                <button onclick="startGame('Страны')">Страны</button>
+                <button id="buttonItemFruits" onclick="startGame('Фрукты')">Фрукты🍏</button>
+                <button id="buttonItemInsects" onclick="startGame('Насекомые')">Насекомые🐝</button>
+                <button id="buttonItemAnimals" onclick="startGame('Животные')">Животные🐶</button>
+                <button id="buttonItemColors" onclick="startGame('Цвета')">Цвета🚦</button>
+                <button id="buttonItemCountries" onclick="startGame('Страны')">Страны🇬🇧</button>
                 </div>
             </div>
             <div id="keyboardBorderStyle">
