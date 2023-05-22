@@ -56,6 +56,9 @@ jobs:
 
       - name: Install Jsdom
         run: npm install jsdom --save-dev
+
+      - name: Run Unit-Test
+        run: npm test
         
       - name: Build assets
         run: |
