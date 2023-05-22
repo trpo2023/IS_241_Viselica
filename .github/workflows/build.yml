@@ -47,6 +47,15 @@ jobs:
         
       - name: Install ESLint in JS
         run: npx eslint .
+
+      - name: Install Jest
+        run: npm install --save-dev jest
+        
+      - name: Install Jest-environment
+        run: npm install --save-dev jest-environment-jsdom
+
+      - name: Install Jsdom
+        run: npm install jsdom --save-dev
         
       - name: Build assets
         run: |

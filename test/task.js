@@ -55,6 +55,22 @@ function guessLetter (guess = document.getElementById("guess").value) {
     alert("Вы уже угадывали эту букву.");
     return;
   }
+  // Уменьшаем количество попыток
+  function liveLose () {
+    remainingGuesses--;
+  }
+  // Функция для обновления отображения угаданных букв
+  function updateGuessedLetters () {
+    let displayString = "";
+    for (let i = 0; i < secretWord.length; i++) {
+      if (guessedLetters.includes(secretWord[i])) {
+        displayString += secretWord[i] + " ";
+      } else {
+        displayString += "_ ";
+      }
+    }
+    secretWordElement.innerHTML = displayString;
+  }
   // Добавляем букву в список угаданных и блокируем кнопку
   guessedLetters.push(guess);
   // Проверяем, есть ли угаданная буква в загаданном слове
@@ -73,18 +89,13 @@ function guessLetter (guess = document.getElementById("guess").value) {
     }
   } else {
     guessedLettersFalse.push(guess);
+    liveLose();
     // Блокируем использованные кнопки
     document.querySelectorAll(".key").forEach(function (button) {
       if (guessedLettersFalse.includes(button.innerHTML)) {
         blockButtonFalse(button);
       }
     });
-    // Уменьшаем количество попыток
-    remainingGuesses--;
-    // обновляем отображение оставшихся попыток
-    updateRemainingGuesses();
-    // Обновляем отображение виселицы
-    updateHangman();
     // Проверяем, закончились ли попытки
     if (remainingGuesses === 0) {
       openModalLost();
@@ -102,3 +113,11 @@ function checkWin () {
   }
   } return true;
 }
+
+module.exports = {
+  guessLetter,
+  checkWin,
+  guessedLetters,
+  remainingGuesses,
+  secretWord
+};
