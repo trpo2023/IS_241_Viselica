@@ -11,17 +11,19 @@
             <div id="remainingGuesses"></div>
             <div id="themeContainer"></div>
         </div>
-        <div id="hangman">
-            <div id="base1"></div> 
-            <div id="base2"></div> 
-            <div id="base3"></div>
-            <div id="base4"></div>         
-            <div id="head"></div>
-            <div id="body"></div>
-            <div id="left-arm"></div>
-            <div id="right-arm"></div>
-            <div id="left-leg"></div>
-            <div id="right-leg"></div>
+        <div id="hangmanBorderStyle">
+            <div id="hangman">
+                <div id="base1"></div> 
+                <div id="base2"></div> 
+                <div id="base3"></div>
+                <div id="base4"></div>         
+                <div id="head"></div>
+                <div id="body"></div>
+                <div id="left-arm"></div>
+                <div id="right-arm"></div>
+                <div id="left-leg"></div>
+                <div id="right-leg"></div>
+            </div>
         </div>
         <div>
             <p id="secretWord"></p>
@@ -60,40 +62,42 @@
                 <button onclick="startGame('Страны')">Страны</button>
                 </div>
             </div>
-            <div id="keyboard">
-            <!-- Создаем кнопки для букв русского алфавита -->
-            <button class="key" onclick="addLetter('А')">А</button>
-            <button class="key" onclick="addLetter('Б')">Б</button>
-            <button class="key" onclick="addLetter('В')">В</button>
-            <button class="key" onclick="addLetter('Г')">Г</button>
-            <button class="key" onclick="addLetter('Д')">Д</button>
-            <button class="key" onclick="addLetter('Е')">Е</button>
-            <button class="key" onclick="addLetter('Ж')">Ж</button>
-            <button class="key" onclick="addLetter('З')">З</button>
-            <button class="key" onclick="addLetter('И')">И</button>
-            <button class="key" onclick="addLetter('Й')">Й</button>
-            <button class="key" onclick="addLetter('К')">К</button>
-            <button class="key" onclick="addLetter('Л')">Л</button>
-            <button class="key" onclick="addLetter('М')">М</button>
-            <button class="key" onclick="addLetter('Н')">Н</button>
-            <button class="key" onclick="addLetter('О')">О</button>
-            <button class="key" onclick="addLetter('П')">П</button>
-            <button class="key" onclick="addLetter('Р')">Р</button>
-            <button class="key" onclick="addLetter('С')">С</button>
-            <button class="key" onclick="addLetter('Т')">Т</button>
-            <button class="key" onclick="addLetter('У')">У</button>
-            <button class="key" onclick="addLetter('Ф')">Ф</button>
-            <button class="key" onclick="addLetter('Х')">Х</button>
-            <button class="key" onclick="addLetter('Ц')">Ц</button>
-            <button class="key" onclick="addLetter('Ч')">Ч</button>
-            <button class="key" onclick="addLetter('Ш')">Ш</button>
-            <button class="key" onclick="addLetter('Щ')">Щ</button>
-            <button class="key" onclick="addLetter('Ъ')">Ъ</button>
-            <button class="key" onclick="addLetter('Ы')">Ы</button>
-            <button class="key" onclick="addLetter('Ь')">Ь</button>
-            <button class="key" onclick="addLetter('Э')">Э</button>
-            <button class="key" onclick="addLetter('Ю')">Ю</button>
-            <button class="key" onclick="addLetter('Я')">Я</button>
+            <div id="keyboardBorderStyle">
+                <div id="keyboard">
+                <!-- Создаем кнопки для букв русского алфавита -->
+                <button class="key" onclick="addLetter('А')">А</button>
+                <button class="key" onclick="addLetter('Б')">Б</button>
+                <button class="key" onclick="addLetter('В')">В</button>
+                <button class="key" onclick="addLetter('Г')">Г</button>
+                <button class="key" onclick="addLetter('Д')">Д</button>
+                <button class="key" onclick="addLetter('Е')">Е</button>
+                <button class="key" onclick="addLetter('Ж')">Ж</button>
+                <button class="key" onclick="addLetter('З')">З</button>
+                <button class="key" onclick="addLetter('И')">И</button>
+                <button class="key" onclick="addLetter('Й')">Й</button>
+                <button class="key" onclick="addLetter('К')">К</button>
+                <button class="key" onclick="addLetter('Л')">Л</button>
+                <button class="key" onclick="addLetter('М')">М</button>
+                <button class="key" onclick="addLetter('Н')">Н</button>
+                <button class="key" onclick="addLetter('О')">О</button>
+                <button class="key" onclick="addLetter('П')">П</button>
+                <button class="key" onclick="addLetter('Р')">Р</button>
+                <button class="key" onclick="addLetter('С')">С</button>
+                <button class="key" onclick="addLetter('Т')">Т</button>
+                <button class="key" onclick="addLetter('У')">У</button>
+                <button class="key" onclick="addLetter('Ф')">Ф</button>
+                <button class="key" onclick="addLetter('Х')">Х</button>
+                <button class="key" onclick="addLetter('Ц')">Ц</button>
+                <button class="key" onclick="addLetter('Ч')">Ч</button>
+                <button class="key" onclick="addLetter('Ш')">Ш</button>
+                <button class="key" onclick="addLetter('Щ')">Щ</button>
+                <button class="key" onclick="addLetter('Ъ')">Ъ</button>
+                <button class="key" onclick="addLetter('Ы')">Ы</button>
+                <button class="key" onclick="addLetter('Ь')">Ь</button>
+                <button class="key" onclick="addLetter('Э')">Э</button>
+                <button class="key" onclick="addLetter('Ю')">Ю</button>
+                <button class="key" onclick="addLetter('Я')">Я</button>
+                </div>
             </div>
         </div>
         <script src="/JS/app.js"></script>

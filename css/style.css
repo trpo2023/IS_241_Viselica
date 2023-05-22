@@ -25,11 +25,14 @@ h3 {
   border: 2px solid black;
 }
 /* Стили для отображения виселицы */
+#hangmanBorderStyle {
+  display: flex;
+  justify-content: center;
+}
 #hangman {
   width: 300px;
   height: 300px;
   margin: 50px;
-  margin-left: 25%;
   border: 1px solid black;
   position: sticky;
   background-color: white;
@@ -147,12 +150,16 @@ input {
   text-align: center;
   margin: 50px;
 }
+#keyboardBorderStyle {
+  display: flex;
+  justify-content: center;
+}
 #keyboard {
-  width: 815px;
+  width: 812px;
   border: 1px solid black;
-  position: absolute;
-  margin-left: 25%;
+  position: sticky;
   border-collapse: collapse;
+  justify-content: center;
 }
 #keyboard div {
   position: absolute;
@@ -214,6 +221,7 @@ background-color: rgba(0,0,0,0.4);
   font-size: 3em;
   text-align: center;
   font-family: Arial;
+  margin: auto;
 }
 
 /* Стили для отображения поле ввода*/
@@ -225,6 +233,7 @@ background-color: rgba(0,0,0,0.4);
 #inputButtonText {
   font-size: 1.2em;
   background-color: #adeede;
+  margin: 18px;
 }
 
 /* Стили для отображения количества попыток*/
@@ -245,8 +254,8 @@ background-color: rgba(0,0,0,0.4);
 /* Стили для отображения попытки и темы в одном блоке */
 #attemptsAndTheme {
   width: 700px;
-  height: 35px;
-  margin: 50px;
+  height: 15px;
+  margin: 15px;
   margin-left: 45%;
   position: sticky;
 }
