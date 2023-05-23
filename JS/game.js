@@ -41,6 +41,7 @@ const rightLegElement = document.getElementById("right-leg");
 // Функция, которая будет вызываться при каждой попытке угадать букву
 function guessLetter (guess = document.getElementById("guess").value) {
   // Проверяем, что введена только одна буква при вводе с физической клавиатуры
+  guess = guess[0].toUpperCase();
   if (guess.length !== 1) {
     alert("Пожалуйста, введите букву.");
     return;
