@@ -56,6 +56,18 @@ function guessLetter (guess = document.getElementById("guess").value) {
     alert("Вы уже угадывали эту букву.");
     return;
   }
+  // Функция для обновления отображения угаданных букв
+  function updateGuessedLetters () {
+    let displayString = "";
+    for (let i = 0; i < secretWord.length; i++) {
+      if (guessedLetters.includes(secretWord[i])) {
+        displayString += secretWord[i] + " ";
+      } else {
+        displayString += "_ ";
+      }
+    }
+    secretWordElement.innerHTML = displayString;
+  }
   // Добавляем букву в список угаданных и блокируем кнопку
   guessedLetters.push(guess);
   // Проверяем, есть ли угаданная буква в загаданном слове
