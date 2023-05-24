@@ -12,7 +12,7 @@ const {
   guessedLetters,
   remainingGuesses,
   secretWord
-} = require('./task.js')
+} = require('./JS/game.js')
 
 // Тест для функции guessLetter
 test('guessLetter угадывает правильную букву', () => {

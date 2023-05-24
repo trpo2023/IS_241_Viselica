@@ -103,3 +103,10 @@ function checkWin () {
   }
   } return true;
 }
+module.exports = {
+  guessLetter,
+  checkWin,
+  guessedLetters,
+  remainingGuesses,
+  secretWord
+};
